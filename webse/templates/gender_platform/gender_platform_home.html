@@ -1,0 +1,277 @@
+{% extends "gender_platform/gender_platform_layout.html" %}
+{% block content %}
+
+  <!-- Introduction -->
+  <section class="home_section_css">
+      <div class="container">
+          <div class="header">
+                <div class="box">
+                      {% with messages = get_flashed_messages(with_categories=true) %}
+                          {% if messages %}
+                              {% for category, message in messages %}
+                                  <div class="alert alert-{{ category }}">
+                                      {{ message }}
+                                  </div> 
+                              {% endfor %}
+                          {% endif %}
+                      {% endwith %}               
+                      <h1 class="text-center"><span class="text-warning"> Gender Studies </span> Platform</h1>
+                      <p class="mb-1">
+                          The Gender Studies platform aims to foster the collaboration between <strong>education</strong> and <strong>society</strong> to study the main <strong>challenges</strong> faced by women and infer <strong>policies</strong> to solve those problems.
+                          </br>
+                          </br>
+                          To achieve that objective, the platform hosts different <strong>dashboards</strong> to access to the most salient databases that study gender. It also hosts the frontier <strong>research</strong> in that field giving the user the access to that knowledge in an interactive way. It also hosts the <strong>apps</strong> developed by the students and researchers that study gender in different courses at the university. It is also a window for those students to disseminate the research conducted in their <strong>thesis</strong>. Finally, it also hosts a <strong>chat</strong> where students, professors and institutions that study gender can share their initiatives in that field. 
+
+                      </p>
+                </div>
+                <div class="box">
+                        <div class="h1 mb-3">
+                          <i class="bi bi-chat-square-dots"></i>
+                        </div>
+                        <h3 class="text-center"><span class="text-warning"> Chat: </span>
+                        </h3>
+                        {% for chat in chats.items %}
+                          <article class="media content-section">
+                          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + chat.author.image_file) }}">
+                          <div class="media-body">
+                              <div class="article-metadata">
+                              <a class="mr-2" href="{{ url_for('gender_platform_chats.user_chats', username=chat.author.username)}}">{{ chat.author.username }}</a>
+                              <small class="text-muted">{{ chat.date_posted.strftime('%Y-%m-%d') }}</small>
+                              </div>
+                              <h2><a class="article-title" href="{{ url_for('gender_platform_chats.chat', chat_id=chat.id)}}">{{ chat.title }}</a></h2>
+                              <p class="article-content">{{ chat.content }}</p>
+                          </div>
+                          </article>
+                      {% endfor %}
+                      {% for page_num in chats.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                        {% if page_num %}
+                          {% if chats.page == page_num %}
+                            <a class="btn btn-info mb-4" href="{{ url_for('gender_platform.gender_platform_home', page=page_num) }}">{{ page_num }}</a>
+                          {% else %}
+                            <a class="btn btn-outline-info mb-4" href="{{ url_for('gender_platform.gender_platform_home', page=page_num) }}">{{ page_num }}</a>
+                          {% endif %}
+                        {% else %}
+                          ...
+                        {% endif %}
+                      {% endfor %}
+                </div>
+            </div>
+        </div>
+      </div>
+    </section> 
+
+    <!-- IWD Questions -->
+    <section class="p-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md">
+                    <div class="card text-light", style="background-color:#8bbbd9;">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <img
+                                    src="{{url_for('static', filename='figures/green_digitalization_course/digitalization_course_icon.svg')}}"
+                                    width="50" 
+                                    height="50"
+                                alt=""/>
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Questionnaire 1
+                            </h3>
+                            <p class="card-text">
+                                This questionnaire study the main challenges of the female professors, researchers and PhD. students at the university.
+                            </p>
+                            <div class="container_buttons_links_course_green">
+                               <div class="btn">
+                                   <a href="#" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Questionnaire 1</a>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div class="card text-light", style="background-color:#f2c299;">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <img
+                                    src="{{url_for('static', filename='figures/forward/se_course_icon.svg')}}"
+                                    width="50" 
+                                    height="50"
+                                alt=""/>
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Questionnaire 2
+                            </h3>
+                            <p class="card-text">
+                                This questionnaire study the main challenges of the female bachelor and master students at the university.
+                            </p>
+                            <div class="container_buttons_links_course_se">
+                               <div class="btn">
+                                   <a href="#" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Questionnaire 2</a>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card text-light", style="background-color:#8bbbd9;">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <img
+                                    src="{{url_for('static', filename='figures/green_digitalization_course/digitalization_course_icon.svg')}}"
+                                    width="50" 
+                                    height="50"
+                                alt=""/>
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Questionnaire 3
+                            </h3>
+                            <p class="card-text">
+                                This questionnaire study the main challenges of the female administrative staff at the university.
+                            </p>
+                            <div class="container_buttons_links_course_green">
+                               <div class="btn">
+                                   <a href="#" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Questionnaire 3</a>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card text-light", style="background-color:#f2c299;">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <img
+                                    src="{{url_for('static', filename='figures/forward/se_course_icon.svg')}}"
+                                    width="50" 
+                                    height="50"
+                                alt=""/>
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Questionnaire 4
+                            </h3>
+                            <p class="card-text">
+                                This questionnaire study the main challenges of the female maintenance staff at the university.
+                            </p>
+                            <div class="container_buttons_links_course_se">
+                               <div class="btn">
+                                   <a href="#" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Questionnaire 4</a>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </section>
+
+
+  <!-- IWD Activities
+  <section class="section_gender_activities">
+    <div class="container_gender_activities">
+            <div class="box_gender_activities">
+              <div class="card-body text-center">
+                <div class="h1 mb-3">
+                    <img
+                        src="{{url_for('static', filename='figures/green_digitalization_course/digitalization_course_icon.svg')}}"
+                        width="50" 
+                        height="50"
+                    alt=""/>
+                </div>
+                <h3 class="card-title mb-3">
+                    ....
+                </h3>
+                <p class="card-text">
+                    ...
+                </p>
+                <div class="container_buttons_links_course_green">
+                    <div class="btn">
+                        <a href="#" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">....</a>
+                    </div>
+                </div>
+            </div>
+            </div>    
+            <div class="box_gender_activities">
+              <div class="card-body text-center">
+                <div class="h1 mb-3">
+                    <img
+                        src="{{url_for('static', filename='figures/forward/se_course_icon.svg')}}"
+                        width="50" 
+                        height="50"
+                    alt=""/>
+                </div>
+                <h3 class="card-title mb-3">
+                    ....
+                </h3>
+                <p class="card-text">
+                    ...
+                </p>
+                <div class="container_buttons_links_course_green">
+                    <div class="btn">
+                        <a href="#" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">....</a>
+                    </div>
+                </div>
+              </div>                    
+            </div>            
+        </div>        
+    </div>
+</section>     -->
+
+<!-- IWD Questionnaire -->
+<!-- <section class="p-5">
+  <div class="container">
+      <div class="row text-center g-4">
+          <div class="col-md">
+              <div class="card text-light", style="background-color:#8bbbd9;">
+                  <div class="card-body text-center">
+                      <div class="h1 mb-3">
+                          <img
+                              src="{{url_for('static', filename='figures/green_digitalization_course/digitalization_course_icon.svg')}}"
+                              width="50" 
+                              height="50"
+                          alt=""/>
+                      </div>
+                      <h3 class="card-title mb-3">
+                          ....
+                      </h3>
+                      <p class="card-text">
+                          ...
+                      </p>
+                      <div class="container_buttons_links_course_green">
+                          <div class="btn">
+                              <a href="#" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">....</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-md">
+              <div class="card text-light", style="background-color:#f2c299;">
+                  <div class="card-body text-center">
+                      <div class="h1 mb-3">
+                          <img
+                              src="{{url_for('static', filename='figures/forward/se_course_icon.svg')}}"
+                              width="50" 
+                              height="50"
+                          alt=""/>
+                      </div>
+                      <h3 class="card-title mb-3">
+                          ...
+                      </h3>
+                      <p class="card-text">
+                          ...
+                      </p>
+                      <div class="container_buttons_links_course_se">
+                          <div class="btn">
+                              <a href="#" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">...</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section> -->
+
+{% endblock content %}
