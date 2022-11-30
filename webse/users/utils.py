@@ -14,12 +14,12 @@ BUCKET="forward-v1"
 s3_r = boto3.resource('s3')
 
 
-# def read_image(image_filename):
-#     im = Image.open(s3_r.Bucket(BUCKET).Object(image_filename).get().get('Body'))
-#     data = io.BytesIO()
-#     im.save(data, im.format)
-#     encoded_img_data = base64.b64encode(data.getvalue())
-#     return encoded_img_data.decode('utf-8')
+def read_image(image_filename):
+    im = Image.open(s3_r.Bucket(BUCKET).Object(image_filename).get().get('Body'))
+    data = io.BytesIO()
+    im.save(data, im.format)
+    encoded_img_data = base64.b64encode(data.getvalue())
+    return encoded_img_data.decode('utf-8')
 
 
 def save_picture(form_picture):
