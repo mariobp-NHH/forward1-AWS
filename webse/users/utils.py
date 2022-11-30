@@ -11,10 +11,11 @@ import secrets
 
 # # For the GitHub:
 BUCKET="forward-v1"
+s3_r = boto3.resource('s3')
 
 
 # def read_image(image_filename):
-#     im = Image.open(Bucket(BUCKET).Object(image_filename).get().get('Body'))
+#     im = Image.open(s3_r.Bucket(BUCKET).Object(image_filename).get().get('Body'))
 #     data = io.BytesIO()
 #     im.save(data, im.format)
 #     encoded_img_data = base64.b64encode(data.getvalue())
@@ -35,7 +36,7 @@ def save_picture(form_picture):
 
     in_mem_file.seek(0)
 
-    Bucket(BUCKET).put_object(Key=picture_fn, Body=in_mem_file)
+    s3_r.Bucket(BUCKET).put_object(Key=picture_fn, Body=in_mem_file)
 
     return picture_fn
 
