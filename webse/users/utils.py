@@ -55,15 +55,6 @@ def save_picture(form_picture):
 #     return picture_fn
 
 # #For the computer bucket s3:
-# ACCESS_KEY="AKIAU5ZFCCSCH3KFDZGM"
-
-# SECRET_KEY="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"
-
-# BUCKET="forward-v1"
-
-# s3_r = boto3.resource('s3',
-#                       aws_access_key_id=ACCESS_KEY,
-#                       aws_secret_access_key=SECRET_KEY)
 
 # def read_image(image_filename):
 #     im = Image.open(s3_r.Bucket(BUCKET).Object(image_filename).get().get('Body'))
