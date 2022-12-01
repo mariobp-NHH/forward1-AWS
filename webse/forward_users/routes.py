@@ -62,6 +62,6 @@ def forward_users_account():
 
     encoded_data=read_image(current_user.image_file)
 
-    return render_template('forward_home/forward_account.html', title='Account', image_file=encoded_data, form=form) 
+    return render_template('forward_home/forward_account.html', title='Account', image_file=encoded_data, form=form, current_user_image=current_user.image_file) 
 
    
