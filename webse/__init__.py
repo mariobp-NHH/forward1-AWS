@@ -8,7 +8,8 @@ application = Flask(__name__)
 
 
 application.config['SECRET_KEY'] = '1dfc4dedcdsdsd5b2ffa3a090dfc34f845fd'
-DBVAR = 'sqlite:///user.db'
+#DBVAR = 'sqlite:///user.db'
+DBVAR = "RDS-forward1-aws"
 application.config['SQLALCHEMY_DATABASE_URI'] = DBVAR
 application.config['SQLALCHEMY_BINDS'] ={'gd_course': 'sqlite:///gd_course.db', 'gender_platform': 'sqlite:///gender_platform.db'}
 db = SQLAlchemy(application)
