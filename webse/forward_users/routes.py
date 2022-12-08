@@ -3,7 +3,7 @@ from webse import application, db, bcrypt
 from webse.forward_users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from webse.models import User
 from flask_login import login_user, current_user, logout_user, login_required
-from webse.users.utils import save_picture, read_image
+from webse.forward_users.utils import save_picture, read_image
 
 forward_users= Blueprint('forward_users', __name__)
 
@@ -62,6 +62,4 @@ def forward_users_account():
 
     encoded_data=read_image(current_user.image_file)
 
-    return render_template('forward_home/forward_account.html', title='Account', image_file=encoded_data, form=form, current_user_image=current_user.image_file) 
-
-   
+    return render_template('forward_home/forward_account.html', title='Account', image_file=encoded_data, form=form)   
