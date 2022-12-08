@@ -1,0 +1,66 @@
+{% extends "gd_course/gd_course_layout.html" %}
+{% block content %}
+
+  <!-- Introduction -->
+  <section class="home_section_css">
+      <div class="container">
+          <div class="header">
+                <div class="box">
+                      {% with messages = get_flashed_messages(with_categories=true) %}
+                          {% if messages %}
+                              {% for category, message in messages %}
+                                  <div class="alert alert-{{ category }}">
+                                      {{ message }}
+                                  </div> 
+                              {% endfor %}
+                          {% endif %}
+                      {% endwith %}               
+                      <h1 class="text-center"><span class="text-warning"> Green Digitalization </span> Course</h1>
+                      <p class="mb-1">
+                          The Green Digitalization course aims to connect the most salient topics in <strong>green economy</strong> with <strong>digitalization</strong>.
+                          </br>
+                          </br>
+                          To achieve that objective, during the course the students analyze relevant topic in <strong>green economy</strong>, they build an <strong>economic model</strong> to study that topic and they develop an <strong>app</strong> to conduct all the economic simulations in the economic model.
+                        </br>
+                        </br>
+                          To develop the app, the course is organized in three blocks that complement each other. First the students design the <strong>layout of the app</strong> by using HTML, CSS, JavaScript and Flask. Second, they program the <strong>economic simulations</strong> by using Python and SQLAlchemy. Finally, they <strong>deploy their apps</strong> in the server, by using GitGub, Heroku, and Amazon Web Services.
+
+                      </p>
+                </div>
+                <div class="box">
+                  <div class="h1 mb-3">
+                    <i class="bi bi-chat-square-dots"></i>
+                  </div>
+                  <h3 class="text-center"><span class="text-warning"> Chat: </span>
+                  </h3>
+                  {% for chat in chats.items %}
+                    <article class="media content-section">
+                    <img class="rounded-circle article-img" src="data:image/jpeg;base64,{{ func(chat.author.image_file) }}">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                        <a class="mr-2" href="{{ url_for('gd_course_chats.user_chats', username=chat.author.username)}}">{{ chat.author.username }}</a>
+                        <small class="text-muted">{{ chat.date_posted.strftime('%Y-%m-%d') }}</small>
+                        </div>
+                        <h2><a class="article-title" href="{{ url_for('gd_course_chats.chat', chat_id=chat.id)}}">{{ chat.title }}</a></h2>
+                        <p class="article-content">{{ chat.content }}</p>
+                    </div>
+                    </article>
+                {% endfor %}
+                {% for page_num in chats.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                  {% if page_num %}
+                    {% if chats.page == page_num %}
+                      <a class="btn btn-info mb-4" href="{{ url_for('gd_course.gd_course_home', page=page_num) }}">{{ page_num }}</a>
+                    {% else %}
+                      <a class="btn btn-outline-info mb-4" href="{{ url_for('gd_course.gd_course_home', page=page_num) }}">{{ page_num }}</a>
+                    {% endif %}
+                  {% else %}
+                    ...
+                  {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+      </div>
+    </section> 
+
+{% endblock content %}
