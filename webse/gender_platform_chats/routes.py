@@ -2,6 +2,7 @@ from flask import render_template, url_for, Blueprint, flash, redirect, request
 from webse import application, db, bcrypt
 from webse.models import User, ChatGender
 from flask_login import login_user, current_user, logout_user, login_required
+from webse.forward_users.utils import read_image
 from webse.gender_platform_chats.forms import ChatForm
 
 gender_platform_chats= Blueprint('gender_platform_chats', __name__)
@@ -21,7 +22,7 @@ def gender_platform_chats_new_chat():
 @gender_platform_chats.route("/gender_platform/chat/<int:chat_id>")
 def chat(chat_id):
     chat = ChatGender.query.get_or_404(chat_id)
-    return render_template('gender_platform/gender_platform_chat.html', title=chat.title, chat=chat)    
+    return render_template('gender_platform/gender_platform_chat.html', title=chat.title, chat=chat, func=read_image)    
 
 @gender_platform_chats.route("/gender_platform/chat/<int:chat_id>/update", methods=['GET', 'POST'])
 @login_required
@@ -40,7 +41,7 @@ def update_chat(chat_id):
         form.title.data = chat.title
         form.content.data = chat.content
     return render_template('gender_platform/gender_platform_create_chat.html', title='Update Chat',
-                           form=form, legend='Update Chat')    
+                           form=form, legend='Update Chat', func=read_image)    
 
 @gender_platform_chats.route("/gender_platform/chat/<int:chat_id>/delete", methods=['GET', 'POST'])
 @login_required
@@ -62,4 +63,4 @@ def user_chats(username):
     chats = ChatGender.query.filter_by(author=user)\
         .order_by(ChatGender.date_posted.desc())\
         .paginate(page=page, per_page=2)
-    return render_template('gender_platform/gender_platform_user_chats.html', chats=chats, user=user)                              
+    return render_template('gender_platform/gender_platform_user_chats.html', chats=chats, user=user, func=read_image)                              
