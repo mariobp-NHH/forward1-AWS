@@ -1,0 +1,205 @@
+{% extends "forward_home/layout.html" %}
+{% block content %}
+
+  {% if current_user.is_authenticated %}  
+  <!-- Introduction -->
+  <section class="home_section_css", style="background-color:#343a40;">
+    <div class="container", style="background-color:#343a40;">
+        <div class="header">
+              <div class="box", style="background-color:#343a40;">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    {{ message }}
+                                </div> 
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}               
+                    <h1 class="text-center"><span class="text-warning"> Forward: </span> Connecting Education and Society</h1>
+                    <p class="lead my-3">
+                        Forward is an <b>educational platform</b> that aims to connect education and society making that interaction fluent and effective.
+                    </p>
+                    <p class="lead my-3">
+                        To achieve that objective, Forward hosts different <b>courses</b> to facilitate the access to education by active learning. Forward also host thematic <b>platforms</b> where the users have access to dashboards that disclose useful data in different disciplines, and where the user have access to frontier research in those disciplines.
+                    </p> 
+              </div>
+              <div class="box", style="background-color:#343a40;">
+                <img class="img-fluid w-100 rounded mx-auto d-block"
+                    src="{{url_for('static', filename='figures/forward/forward_icon.svg')}}"
+                    width="150" 
+                     height="150"
+                    alt=""/>
+                
+              </div>
+          </div>
+      </div>
+    </div>
+  </section> 
+  {% else %}
+  <!-- Introduction -->
+  <section class="home_section_css", style="background-color:#343a40;">
+    <div class="container", style="background-color:#343a40;">
+        <div class="header">
+              <div class="box", style="background-color:#343a40;">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    {{ message }}
+                                </div> 
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}               
+                    <h1 class="text-center"><span class="text-warning"> Forward: </span> Connecting Education and Society</h1>
+                    <p class="lead my-3">
+                        Forward is an <b>educational platform</b> that aims to connect education and society making that interaction fluent and effective.
+                    </p>
+                    <p class="lead my-3">
+                        To achieve that objective, Forward hosts different <b>courses</b> to facilitate the access to education by active learning. Forward also host thematic <b>platforms</b> where the users have access to dashboards that disclose useful data in different disciplines, and where the user have access to frontier research in those disciplines.
+                    </p> 
+                    </br>   
+                                    
+                    <div class="container_buttons_links_header">
+                        <div class="btn">
+                            <a href="{{url_for('forward_users.forward_users_register')}}" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Register</a>
+                        </div>
+                        <div class="btn">
+                            <a href="{{url_for('forward_users.forward_users_login')}}" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Login</a>
+                        </div>
+                    </div> 
+              </div>
+              <div class="box", style="background-color:#343a40;">
+                <img class="img-fluid w-100 rounded mx-auto d-block"
+                    src="{{url_for('static', filename='figures/forward/forward_icon.svg')}}"
+                    width="150" 
+                     height="150"
+                    alt=""/>
+                
+              </div>
+          </div>
+      </div>
+    </div>
+  </section>
+  {% endif %} 
+
+    <!-- Courses -->
+    <section class="p-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md">
+                    <div class="card text-light", style="background-color:#8bbbd9;">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <img
+                                    src="{{url_for('static', filename='figures/green_digitalization_course/digitalization_course_icon.svg')}}"
+                                    width="50" 
+                                    height="50"
+                                alt=""/>
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Green Digitalization and App Development
+                            </h3>
+                            <p class="card-text">
+                                This course helps the students to develop a complete app to
+                                work out transport carbon emissions.
+                            </p>
+                            <div class="container_buttons_links_course_green">
+                               <div class="btn">
+                                   <a href="{{url_for('gd_course.gd_course_home')}}" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Green Digitalization</a>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div class="card text-light", style="background-color:#f2c299;">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <img
+                                    src="{{url_for('static', filename='figures/forward/se_course_icon.svg')}}"
+                                    width="50" 
+                                    height="50"
+                                alt=""/>
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Sustainable Energy
+                            </h3>
+                            <p class="card-text">
+                                This course covers the most salient topics in sustainable energy, and connects those topics
+                                with the Sustainable Development Goals
+                            </p>
+                            <div class="container_buttons_links_course_se">
+                               <div class="btn">
+                                   <a href="#" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Sustainable Energy</a>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms -->
+    <section class="p-5", style="background-color:#6c757d;">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md">
+                    <div class="card text-light", style="background-color:#9ac2be;">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <img
+                                    src="{{url_for('static', filename='figures/forward/se_platform_icon.svg')}}"
+                                    width="50" 
+                                    height="50"
+                                alt=""/>
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Sustainable Energy Platform
+                            </h3>
+                            <p class="card-text">
+                                This <b>platform</b> provides dashboards with useful data about <b>energy markets</b>.
+                                It also host the most advanced research on energy markets.
+                            </p>
+                            <div class="container_buttons_links_platform_se">
+                               <div class="btn">
+                                   <a href="#" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Sustainable Energy Platform</a>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div class="card text-light", style="background-color:#977abf;">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <img
+                                    src="{{url_for('static', filename='figures/forward/gender_platform_icon.svg')}}"
+                                    width="50" 
+                                    height="50"
+                                alt=""/>
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Gender Studies Platform
+                            </h3>
+                            <p class="card-text">
+                                This <b>platform</b> provides dashboards with useful data about <b>gender studies</b>.
+                                It also host the most advanced research on gender studies.
+                            </p>
+                            <div class="container_buttons_links_platform_gender">
+                               <div class="btn">
+                                   <a href="{{url_for('gender_platform.gender_platform_home')}}" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Gender Studies Platform</a>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock content %}
