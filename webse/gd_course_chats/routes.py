@@ -2,6 +2,7 @@ from flask import render_template, url_for, Blueprint, flash, redirect, request
 from webse import application, db, bcrypt
 from webse.models import User, ChatGD
 from flask_login import login_user, current_user, logout_user, login_required
+from webse.forward_users.utils import read_image
 from webse.gd_course_chats.forms import ChatForm
 
 gd_course_chats= Blueprint('gd_course_chats', __name__)
@@ -21,7 +22,7 @@ def gd_course_chats_new_chat():
 @gd_course_chats.route("/green_digitalization_course/chat/<int:chat_id>")
 def chat(chat_id):
     chat = ChatGD.query.get_or_404(chat_id)
-    return render_template('gd_course/gd_course_chat.html', title=chat.title, chat=chat)    
+    return render_template('gd_course/gd_course_chat.html', title=chat.title, chat=chat, func=read_image)    
 
 @gd_course_chats.route("/green_digitalization_course/chat/<int:chat_id>/update", methods=['GET', 'POST'])
 @login_required
@@ -61,4 +62,4 @@ def user_chats(username):
     chats = ChatGD.query.filter_by(author=user)\
         .order_by(ChatGD.date_posted.desc())\
         .paginate(page=page, per_page=2)
-    return render_template('gd_course/gd_course_user_chats.html', chats=chats, user=user)                              
+    return render_template('gd_course/gd_course_user_chats.html', chats=chats, user=user, func=read_image)                              
